@@ -70,7 +70,8 @@ void SimulationBridge::run() {
       _sharedMemory().robotIsDone();
     }
   } catch (std::exception& e) {
-    strncpy(_sharedMemory().robotToSim.errorMessage, e.what(), sizeof(_sharedMemory().robotToSim.errorMessage));
+    //strncpy(_sharedMemory().robotToSim.errorMessage, e.what(), sizeof(_sharedMemory().robotToSim.errorMessage));
+    snprintf(_sharedMemory().robotToSim.errorMessage, sizeof(_sharedMemory().robotToSim.errorMessage), "%s", e.what());
     _sharedMemory().robotToSim.errorMessage[sizeof(_sharedMemory().robotToSim.errorMessage) - 1] = '\0';
     throw e;
   }
